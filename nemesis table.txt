@@ -1,0 +1,256 @@
+getgenv().Nemesis = {
+    Connections = {}; -- Indexes of every rbxscript connection, please don't remove 🙏
+    Cache = {
+        Execution = tick();
+        Elapsed = wait(0.00350); -- getgenv().Nemesis.Cache.Elapsed, DONT MODIFY THIS!
+        MemorySpoofer = {
+            SpoofedMem = 482.50;
+            SpoofedMem_Console = 482.50;
+
+            SpoofMem_Positive = {[0] = 294; [1] = 338};
+            SpoofMem_Negative = {[0] = 384; [1] = 418};
+        };
+    };
+    Lock = {
+        Target = nil;
+        Prediction = {
+            Pred = 0.1468;
+            Enabled = true; -- Disabled will have 0 pred so you will be missing almost all of your shots
+            AutomaticPred = {
+                Enabled = false;
+                Mode = "Advanced"; --<Pred mode> [Default : Ping based / Advanced : Ping based + depending on the distance from the enemy you are locking on]
+                Range = "Mid"; --<Range mode> [close / mid / far]
+                PingPreds = {
+                    [30] = 0.11;
+                    [40] = 0.1256;
+                    [50] = 0.112;
+                    [60] = 0.1335;
+                    [70] = 0.131;
+                    [80] = 0.132;
+                    [90] = 0.136;
+                    [105] = 0.138;
+                    [110] = 0.146;
+                    [120] = 0.149;
+                    [130] = 0.151;
+                    [140] = 0.153;
+                };
+            };
+        };
+        Smoothness = {
+            Smoothn = 0.084;
+            Enabled = false;
+        };
+        Shake = {
+            X = {
+                Negative = -2; Positive = 1;
+            };
+            Y = {
+                Negative = -0.15; Positive = 0.35;
+            };
+            Z = {
+                Negative = -1; Positive = 0.1;
+            };
+            Enabled = false;
+        };
+        Radius = 60;
+        Method = "Mouse"; --<Find Method> [Mouse / Character]
+        FOV = {
+            GunFovs = {};
+            Visuals = {
+                Circle = {
+                    Visible = false;
+                    Color = Color3.fromRGB(255, 255, 255);
+                    Filled = false;
+                    Transparency = 0.15;
+                    NumSides = 128;
+                    Thickness = 0;
+                    Radius = 0; -- Will be modified later in the script
+                    Position = Vector2.new(0, 0); -- Will be modified later in the script
+                    -- Drawing.new Instance
+                    _DRAWING_FOV = Drawing.new("Circle");
+                }; -- Visuals for Circle
+            };
+            UseFOV = false;
+        };
+
+        MainPart = "HumanoidRootPart";
+        Checks = {
+            CrewCheck = true; -- If target that was picked up by the lock is in the same crew
+            KOCheck = true; -- If KO Constraint is inside their body effects
+            GrabbedCheck = true; -- If grabbed
+            VisibleCheck = true; -- If behind a wall, uses raycasting
+            AntiCheck = true; -- If using anti
+        };
+        Toggled = false;
+    };
+    Silent = {
+        ARGUMENT_INDICATOR = "UpdateMousePos"; -- Very important for the silent to work.
+        -------------------
+        ALLOWED_ENTITIES = {
+            ["Player"] = true;
+            ["NPC"] = false;
+        }; --<Allowed entities> (this will declare what kind of humanoid will be targetted. can be both, but better would be only Player.)
+        Prediction = {
+            Pred = 0.1658;
+            Enabled = true; -- Disabled will have 0 pred so you will be missing almost all of your shots
+            AutomaticPred = {
+                Enabled = false;
+                Mode = "Advanced"; --<Pred mode> [Normal : Ping based / Advanced : Ping based + depending on the distance from the enemy you are locking on]
+                Range = "Mid"; --<Range mode> [close / mid / far]
+                PingPreds = {
+                    [30] = 0.11;
+                    [40] = 0.1256;
+                    [50] = 0.112;
+                    [60] = 0.1335;
+                    [70] = 0.131;
+                    [80] = 0.132;
+                    [90] = 0.136;
+                    [105] = 0.138;
+                    [110] = 0.142;
+                    [120] = 0.145;
+                    [130] = 0.151;
+                    [140] = 0.153;
+                };
+            };
+        };
+        Radius = 70; --<Search Radius>--
+        Method = "Mouse"; --<Method type> [Mouse / Character]
+        FOV = {
+            GunFovs = {};
+            Visuals = {
+                Circle = {
+                    Color = Color3.fromRGB(255, 255, 255);
+                    Filled = false;
+                    Transparency = 0.15;
+                    NumSides = 128;
+                    Thickness = 0;
+                    Radius = 0; -- Will be modified later in the script
+                    Position = Vector2.new(0, 0); -- Will be modified later in the script
+                    -- Drawing.new Instance
+                    _DRAWING_FOV = Drawing.new("Circle");
+                }; -- Visuals for Circle
+            };
+            UseFOV = true;
+        };
+        Parts = {
+            "Head",
+            "HumanoidRootPart";
+            "UpperTorso";
+            "LowerTorso";
+        };
+        Checks = {
+            CrewCheck = true; -- If target that was picked up by the silent is in the same crew
+            KOCheck = true; -- If KO Constraint is inside their body effects
+            GrabbedCheck = true; -- If grabbed
+            VisibleCheck = true; -- If behind a wall, uses raycasting
+            AntiCheck = true; -- If using anti
+        };
+
+        MainPart = "HumanoidRootPart";
+        AimingMethod = {
+            UseMainPart = true;
+            UseRandomPart = false;
+            UseNearestPart = false; -- Nearest point
+        };
+        UseResolver = {
+            Enabled = false;
+            ResolverMethod = "V3";--<Resolver method> [V1 : MoveDirection / V2 : LookVector / V3 : Velocity Recalc / V4 : Delta / V5 : 0 Pred]
+            ResolverPred = {
+                ["v1"] = 1.15; -- 1.15 - 2 [recommended]
+                ["v2"] = 1.25; -- 1.25 - 2 [recommended]
+                ["v3"] = 58.5; -- 58.5 - 62.5 [recommended]
+                ["v4"] = 3.25; -- 3.25 - 5 [recommended]
+            };
+        };
+        Toggled = false;
+
+    };
+
+    Objects = {
+        Intro = {};
+        Assets = {};
+    };
+    Settings = {
+        Mode = "Streamable"; --<Script type> [Streamable / Gui]
+        Setting = "Keybind"; -- <Setting Type> [Keybind / Chat]
+        Folder = "Nemesisv3"; -- workspace folder
+        Keybinds = {
+            Lock = "Q";
+            Silent = "M";
+            Panic = "K";
+            FakeMacro = "Z";
+        };
+        FakeMacro = {
+            Mode = "automatic detection"; --<Macro mode> [3rd Person / first Person / automatic detection]
+            Toggled = false;
+            Method = "virtual"; --<Macro method> [virtual (uses virtualinputmanager) / keypress (uses keypress / mouse functions related)]
+        };
+        AntiAimviewer = {
+            Mode = "Offset"; --<Mode type> [Offset : real mouse pos + custom velocity / Random : random velocity]
+            X = {[0] = -5; [1] = 10;};
+            Y = {[0] = -1.5; [1] = 1;};
+            Z = {[0] = -5; [1] = 10;};
+        };
+        Panic = {
+            Enabled = true;
+        };
+        FPS = {
+            Boost = false; -- this will use a fps booster script, which Nemesis v3 doesn't have any rights to but still useful
+            UnlockFPS = true;
+            MaxFPSCap = 999; -- Anything higher than 1K can crash if attempted to cap max fps to that value
+        };
+        Mod_Detect = {
+            Enabled = true;
+            Method = "Kick"; --<Info Method> [Kick / Notification]
+            Rank = 233;
+        }; -- auto kick if the game is from a group and any player that is in the group with a rank higher or equal to the rank index will automatically trigger mod detection
+        KICK_REASONS = {
+            MOD_JOINED = "[beta] - Nemesis v3 detected a mod / admin join!";
+        };
+    };
+    Startup = {
+        DesiredConsoleWatermark = "basic";
+        Notification = {
+            Enabled = false;
+            Data = {
+                Title = "Nemesis";
+                Description = "[beta] - Nemesis v3 loaded in %.2f seconds";
+                Duration = 1;
+            };
+        }; -- Notification
+        Watermark = {
+            Enabled = false;
+            Text = "Nemesis V3";
+            Font = "Monospace";
+            Color = Color3.fromRGB(255, 255, 255);
+            Outline = true;
+            Size = 28;
+        }; -- Watermark at the top left of the screen
+        Intro = {
+            Enabled = true;
+            Data = {
+                IntroType = "Game"; -- <Intro Type> [Game / Console / Both]
+                Game = {
+                    Image = {
+                        ID = 12140499119;
+                    };
+                    Sound = {
+                        Enabled = true;
+                        ID = 1091083826;
+                        Volume = 1.5;
+                    };
+                    Watermark = {
+                        Enabled = true;
+                        Text = "[beta] - Nemesis v3 loading...";
+                        Font = "Plex";
+                        TextSize = 13;
+                        Color = Color3.fromRGB(184, 65, 200)
+                    }; -- Will make a new text instance using Drawing.new with the desired watermark;
+                };
+                Console = {
+                    WATERMARK_COLOR = "@@LIGHT_MAGENTA@@";
+                    Duration = 1;
+                };
+            };
+        };
+    }; -- Actions on startup
