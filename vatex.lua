@@ -94,16 +94,8 @@ getgenv().Vatex = {
         AntiGroundValue = 0.3,
         AntiGroundActivation = -20, -- [ the value it activates at ]
 
-        Custom_AntiAimViewerPoint = { -- [ custom anti aim viewer ]
+        Custom_AAV = { -- [ custom anti aim viewer ]
             Enabled = false,
-            RemoteEvent = (function(Pos) 
-                local MainEvent = game:GetService('ReplicatedStorage').MainEvent 
-                local Args = {
-                    [1] = 'UpdateMousePos',
-                    [2] = Pos
-                }
-                return Args, MainEvent
-            end)
         },
 	['TriggerBot'] = {
         	TriggerBot = true, -- [ shoots AutoPredictionally once locked onto a target ]
@@ -309,23 +301,6 @@ getgenv().Vatex = {
         Degrees = 360, -- [ How Much You Turn
         RotationSpeed = 5, -- [ How Fast You Turn
         Rotation_KeyBind = 'V' -- [ Key To Enable Macro
-    },
-    ['Desync'] = {
-        Enabled = true, -- [ Enable / Disable Desync
-        HealthDeActivation = 7, -- [ Disables The Desync When Your Health Is That Low
-        UseDesyncKey = true, -- [ Use The KeyBind To Enable / Disable The Desync Desync Key
-        DesyncKey = 'X', -- [ Key To Enable / Disable Desync
-        HoldMode = false, -- [ Enables While Only Holding The Key
-        
-        Visualize = {['Enabled'] = true, ['Radius'] = (30), ['Color'] = (Color3.fromRGB(255, 255, 255))}, -- [ Shows An Dot Where The Velocity Is
-        Method = 'Vel_StandBy', -- [ Vel_Multi, Custom_Vel, Vel_StandBy, Vel_Under, Vel_Zero) 2 Diffrent Configurations To Change Server Position (Freeze_Pos, Slow_Data)
-        Power = 5, -- [ How Much Velocity The Method Is Using. Vel_StandBy, Custom_Vel, Vel_Zero And Server Position Changer Does Not Need This
-        
-        ['Custom'] = {
-            Vel_X = 50, -- [ How Much Power Is On X
-            Vel_Y = 50, -- [ How Much Power Is On Y
-            Vel_Z = 50 -- [ How Much Power Is On Z
-        }
     },
     ['ChatCommands'] = {
         Enabled = true, 
