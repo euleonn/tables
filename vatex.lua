@@ -53,58 +53,132 @@
 script:
 
 
-getgenv().Vatex = {
-    ['Configurations'] = {
-        Version = 1.0, -- [ use this to go back to previous versions ( trying to go to a beta version wont work and will instantly blacklist you if you dont have the beta role ) ]
-        Key = 'Key_Here', -- [ put key here ]
-        Intro = false, -- [ shows an intro when injected ]
-        BypassData = false, -- [ bypass cheat detections like adonis and most other anticheats ]
-        AutoLowGfx = false, -- [ enables low gfx on inject ]
-        MuteBoomBox = true, -- [ disables boomboxes on inject ]
-        RemoveSeats = true, -- [ removes seats on inject ]
-        GetInformation = true, -- [ shows a notification on how long it took you to inject and how many times youve injected the script ]
+getgenv().Nemesis = {
+    	['Configurations'] = {
+            Version = 1.0, -- [ use this to go back to previous versions ]
+            Key = 'beta', -- [ put key here ]
+            Intro = false, -- [ shows an intro when injected ]
+            BypassData = false, -- [ bypass cheat detections like adonis and most other anticheats ]
+            LowGfx = false, -- [ enables low gfx on inject ]
+            MuteBoomBox = true, -- [ disables boomboxes on inject ]
+            RemoveSeats = true, -- [ removes seats on inject ]
         }
     },
-    ['Silent'] = {
-        Enabled = true, -- [
-        Enable_Keybind = true, -- [ determines if it uses a keybind to disable and enable silent aim ]
-        KeyBind = 'B', 
-	Mode = 'Rage', -- [ legit, rage ]
-        Notifications = true -- [ sends a notification when silent is disabled / enabled ]
+    	['Silent'] = {
+            Enabled = true, -- [
+            Enable_Keybind = true, -- [ determines if it uses a keybind to disable and enable silent aim ]
+            KeyBind = 'B', 
+            Mode = 'Rage', -- [ legit, rage ]
+            Notifications = true -- [ sends a notification when silent is disabled / enabled ]
         
-	TargetMode = false, -- [ turn this true if you want to use a 'lock on target' mode instead of fov ]
-        TargetMode_CamlockTarget = true, -- [ locks your camera onto target ]
-        ForceKeyBind = 'H',
+            TargetMode = false, -- [ turn this true if you want to use a 'lock on target' mode instead of fov ]
+            TargetMode_CamlockTarget = true, -- [ locks your camera onto target ]
+            ForceKeyBind = 'H',
         
-	PredictMovement = true, -- [ predects targets movement and shoots infront of them ( use autoprediction if you dont have a good prediction ) ]
-        Prediction = 0.11, -- [ the prediction it uses when shooting a target ]
-        Part = HumanoidRootPart,
-        UseAirPart = false, -- [ turn this true if u want it to hit a different part while target is in the air ]
-        AirPart = LowerTorso, -- [ the part it targets while target in in the air ]
-        ClosestPart = true, -- [ gets the closest part on a target and uses that ]
-        ClosestPoint = true, -- [ gets the closest point on target and uses that ]
-        ClosestPointScale = 100, -- [ the scale at closestpoint reaches out on a target ]
-        UseWhitelistedParts = false, -- [ makes it so it only hits certain body parts ]
-        WhitelistedPart = {'Head', 'UpperTorso', 'HumanoidRootPart', 'LowerTorso'}, -- [ the part(s) it uses ]
-        AntiAimViewer = true, -- [ changes mouse position inside of the server to bypass aim viewing ]
-        HitChance = 100, -- [ chance that silent aim hits ]
-        AirHitChance = 100, -- [ chance that silent aim hits your target while in the air
+            Prediction = true, -- [ predects targets movement and shoots infront of them ( use autoprediction if you dont have a good prediction ) ]
+            Prediction = 0.11, -- [ the prediction it uses when shooting a target ]
+            Part = HumanoidRootPart,
+            UseAirPart = false, -- [ turn this true if u want it to hit a different part while target is in the air ]
+            AirPart = LowerTorso, -- [ the part it targets while target in in the air ]
+            ClosestPart = true, -- [ gets the closest part on a target and uses that ]
+            ClosestPoint = true, -- [ gets the closest point on target and uses that ]
+            ClosestPointScale = 100, -- [ the scale at closestpoint reaches out on a target ]
+            UseWhitelistedParts = false, -- [ makes it so it only hits certain body parts ]
+            WhitelistedPart = {'Head', 'UpperTorso', 'HumanoidRootPart', 'LowerTorso'}, -- [ the part(s) it uses ]
+            AntiAimViewer = true, -- [ changes mouse position inside of the server to bypass aim viewing ]
+            HitChance = 100, -- [ chance that silent aim hits ]
+            AirHitChance = 100, -- [ chance that silent aim hits your target while in the air
         
-        AntiGroundShots = true, 
-        AntiGroundValue = 0.3,
-        AntiGroundActivation = -20, -- [ the value it activates at ]
-
-        Custom_AAV = { -- [ custom anti aim viewer ]
-            Enabled = false,
+            AntiGroundShots = true, 
+            AntiGroundValue = 0.3,
+            AntiGroundActivation = -20, -- [ the value it activates at ]
+	},
+        ['Fov'] = {
+            Visible = false, -- [ if fov circle is showing for silent aim ]
+            Method' = 'Mouse', -- [ mouse, screen ]
+            Filled = false, -- [ if the circle is filled or not ]
+            Transparency = 1, -- [ how see through the fov circle is (applies to both filled and not ) ]
+            Color = Color3.fromRGB(255, 255, 255), -- [ what color the circle is ]
+            Offset = Vector2.new(0, 0)), -- [ circle position and offset from cursor ]
+            StickyFov = false, -- [ puts the circle on the target that the silent aim is targetting ]
+            Radius = 10 -- [ how big or small the circle is ]
+        },
+	['Bullet_Redirection'] = {
+            Enabled = true,
+            Prediction = 0.141, -- [ -0.142 is a good pred ]
+            Hitpart = "HumanoidRootPart",
+            Nearest_Hitpart = true,
+            DisableKeybind = true,
+            Keybind = "p",
         },
 	['TriggerBot'] = {
-        	TriggerBot = true, -- [ shoots AutoPredictionally once locked onto a target ]
+        	TriggerBot = true, -- [ automatically shoots once locked onto a target ]
         	TriggerBot_HoldMode = true, -- [ only enables while keybind is being held down ]
-        	TriggerBot_Delay = 100, -- [ the delay it takes to shoots ( milliseconds ) ]
-        	TriggerBotMouseKey = MouseButton3, -- [ mouse bind to enable triggerbot
+        	TriggerBot_Delay = 100, -- [ the amount of time / delay it takes to shoot in milliseconds ]
+        	TriggerBotMouseKey = MouseButton3, -- [ mouse bind to enable triggerbot ]
         	TriggerBot_HotKey = false, -- [ set this to true to use keybord keys instead of mouse keys ]
         	TriggerBotKey = Q, -- [ uses this keybind to enable triggerbot ]
         },
+    	['Camlock'] = {
+        	Enabled = true, 
+        	KeyBind = 'E', 
+        	HoldMode = false,
+        	Method = 'Camera', -- [ mouse, camera ]
+        	Notifications = true -- [ enable / disable camlock target notifications]
+
+        	Prediction = true,
+        	Prediction = 0.136645, -- [ sets your prediction value ]
+        	Part = 'HumanoidRootPart', 
+        	ClosestPart = true,
+        	RandomPart = false, -- [ this will override closest part ]
+        	EnableChance = false,
+        	Chance = 30, -- [ lock on chance ]
+        	UseCircleRadius = true, -- [ only locks onto players inside the circle fov
+        	DisableOutSideCircle = false,
+        
+        	FirstPerson = true,
+        	ThirdPerson = true,
+        
+        	UseSmoothness = true,
+        	Smoothness_X = 0.042,
+        	Smoothness_Y = 0.045,
+
+        	AirSmoothness = true,
+        	AirSmoothness_X = 0.055,
+        	AirSmoothness_Y = 0.055,
+        
+        ['Advanced'] = {
+            WallsV2 = false, 
+            TickBased = false, 
+            Stutter = 1,
+            EasingStyle = 'Linear',
+            EasingDirection = 'Out'
+        },
+        ['FrameSkip'] = {
+            Enabled = true, -- [ Flicks To Targets Part
+            Power = 0.95, -- [ How Much Power It Flicks To The Target
+            UsePrediction = false, -- [ Adds Prediction For Flicking
+            TargetPart = {Enabled = true, Part = Head}, -- [ Flicks To The Part
+            KeyBind = 'Q' -- [ The Keybind To Activate The Flick
+        },
+        ['Shake'] = {
+            Enabled = true, -- [ Enable / Disable Shake
+            X = 20, -- [ How Much It Shakes On X
+            Y = 15, -- [ How Much It Shakes On Y
+            Z = 20, -- [ How Much It Shakes On Z
+            AirShot = true, -- [ Uses Shake Percentage When The Target Is In The Air
+            Airshot_X = 5, -- [ not coded yet ]
+            Airshot_Y = 5,
+            Airshot_Z = 5,
+        },
+        ['Fov'] = {
+            Visible = false, -- [ If The Circle Is Showing Or Not
+            Filled = true, -- [ If The Circle Is Filled
+            Transparency = 0.5, -- [ Circles Transparency
+            Color = Color3.fromRGB(0, 0, 0), -- [ Circle Color
+            Radius = 70 -- [ How Big The Circle Is
+        }
+    },
         ['AutoPrediction'] = {
             Enabled = true, -- [ 
             AutoPrediction = false, -- [ determines if you use auto pred or not, if false then it uses whatever prediction you have set in your camlock / silent prediction ]
@@ -128,16 +202,6 @@ getgenv().Vatex = {
             p30_40 = 0.11, 
             p20_30 = 0.1, 
             p10_20 = 0.05, 
-        },
-        ['Fov'] = {
-            Visible = false, -- [ if fov circle is showing for silent aim ]
-            Method' = 'Mouse', -- [ what position the fov is at (screen makes it where its in the center of your screen ) (mouse, screen) ]
-            Filled = false, -- [ if the circle is filled or not ]
-            Transparency = 1, -- [ how see through the fov circle is (applies to both filled and not ) ]
-            Color = Color3.fromRGB(255, 255, 255), -- [ what color the circle is ]
-            Offset = Vector2.new(0, 0)), -- [ circle position and offset from cursor ]
-            StickyFov = false, -- [ puts the circle on the target that the silent aim is targetting ]
-            Radius = 10 -- [ how big or small the circle is ]
         },
         ['GunFov'] = {
             Enabled = true, -- [ enable or disable gunfov ]
@@ -302,60 +366,20 @@ getgenv().Vatex = {
         RotationSpeed = 5, -- [ How Fast You Turn
         Rotation_KeyBind = 'V' -- [ Key To Enable Macro
     },
-    ['ChatCommands'] = {
-        Enabled = true, 
-
-        Silent_Enabled = '$senable', -- [ The Command To Enable / Disable Silent (With false/true)
-        Silent_Prediction = '$spred', -- [ The Command To Change Silent Prediction (With Numbers)
-        Silent_Fov_Size = '$sfov', -- [ The Command To Change Silent Fov (With Numbers)
-        Silent_Fov_Show = '$sshow', -- [ The Command To Change Silent (With false/true)
-        Silent_HitChance = '$schance', -- [ The Command To Change Silent HitChance (With Numbers)
-        Silent_LegitMode = '$slegit', -- [ The Command To Change Silent LegitMode (With false/true)
-        Silent_BlatantMode = '$sblatant', -- [ The Command To Change Silent BlatantMode (With false/true)
-
-        -- [ Camlock ChatCommands
-        Camlock_Enabled = '$aenabled', -- [ The Command To Enable / Disable Camlock (With false/true)
-        Camlock_Prediction = '$apred', -- [ The Command To Change Camlock Prediction (With Numbers)
-        Camlock_Fov_Size = '$afov', -- [ The Command To Change Camlock Fov (With Numbers)
-        Camlock_Fov_Show = '$ashow', -- [ The Command To Change Camlock (With false/true)
-        Camlock_SmoothX = '$smoothx', -- [ The Command To Change Camlock SmoothNess X Value (With Numbers)
-        Camlock_SmoothY = '$smoothy', -- [ The Command To Change Camlock SmoothNess Y Value (With Numbers)
-        Camlock_Shake = '$ashake', -- [ The Command To Change Camlock Shake Value (With Numbers)
-        
-        -- [ Misc ChatCommands
-        RejoinServer = 'rejserv', -- [ The Command To Rejoin The Server You Are In
-        RandomServer = 'rejoin.', -- [ The Command To Rejoin An Random Server
-        
-        SaveConfig = 'savecon', -- [ Creates An Txt That Saves The Table. (Example Savecon ConfigName)
-        LoadConfig = 'loadcon', -- [ Loads An New Table. (Example loadcon ConfigName)
-
-        CrashMode = '. ', -- [ crash roblox command ]
-        CrashMethod = 'Freeze' -- [ method to crash (freeze, shutdown) ]
-    },
-    ['Esp'] = {
-        Enabled = false, -- [ Enable / Disable Esp
-        UseEspKeyBind = true, -- [ Enable / Disable EspKey
-        EspKey = 'Z', -- [ Key To Enable / Disable Esp
+    ['Desync'] = {
+        Enabled = true, -- [ Enable / Disable Desync
+        HealthDeActivation = 7, -- [ Disables The Desync When Your Health Is That Low
+        UseDesyncKey = true, -- [ Use The KeyBind To Enable / Disable The Desync Desync Key
+        DesyncKey = 'X', -- [ Key To Enable / Disable Desync
         HoldMode = false, -- [ Enables While Only Holding The Key
         
-        TextSize = 16, -- [ how big the text size is ]
+        Visualize = {['Enabled'] = true, ['Radius'] = (30), ['Color'] = (Color3.fromRGB(255, 255, 255))}, -- [ Shows An Dot Where The Velocity Is
+        Method = 'Vel_StandBy', -- [ Vel_Multi, Custom_Vel, Vel_StandBy, Vel_Under, Vel_Zero) 2 Diffrent Configurations To Change Server Position (Freeze_Pos, Slow_Data)
+        Power = 5, -- [ How Much Velocity The Method Is Using. Vel_StandBy, Custom_Vel, Vel_Zero And Server Position Changer Does Not Need This
         
-        Name = {['Enabled'] = true, ['OutLine'] = true, ['Color'] = (Color3.fromRGB(255, 255, 255))},
-        Cheater = {Enabled = true, Suspicious = true, OutLine = true, Color = Color3.fromRGB(255, 0, 0)},
-        Box = {Enabled = true, ['OutLine'] = true, ['Color'] = (Color3.fromRGB(255, 255, 255)},
-        
-        HealthBar = {['Enabled'] = true, ['OutLine'] = true, ['Color'] = (Color3.fromRGB(0, 255, 0)), ['HealthColor'] = true},
-        HealthText = {['Enabled'] = true, ['OutLine'] = true, ['Color'] = (Color3.fromRGB(0, 255, 0)), ['HealthColor'] = true},
-        
-        ArmorBar = {['Enabled'] = true, ['OutLine'] = true, ['Color'] = (Color3.fromRGB(0, 189, 255))},
-        ArmorText = {['Enabled'] = true, ['OutLine'] = true, ['Color'] = (Color3.fromRGB(0, 189, 255))},
-        
-        Distance = {['Enabled'] = true, ['OutLine'] = true, ['Color'] = (Color3.fromRGB(255, 255, 255))},
-        Tool = {['Enabled'] = true, ['OutLine'] = true, ['Color'] = (Color3.fromRGB(255, 255, 255))},
-        Flags = {['Enabled'] = false, ['WalkingState'] = true, ['DesyncState'] = true, ['OutLine'] = true, ['Color'] = (Color3.fromRGB(255, 255, 255))},
-        Tracer = {['Enabled'] = false, ['Method'] = ('Mouse'), ['Thickness'] = (1), ['Color'] = (Color3.fromRGB(255, 255, 255))},
-        
-        CrewColor = {['Enabled'] = true, ['Color'] = (Color3.fromRGB(0, 255, 0))},
-        TargetColor = {['Enabled'] = false, ['Color'] = (Color3.fromRGB(255, 0, 0))}
+        ['Custom'] = {
+            Vel_X = 50, -- [ How Much Power Is On X
+            Vel_Y = 50, -- [ How Much Power Is On Y
+            Vel_Z = 50 -- [ How Much Power Is On Z
     }
 }
